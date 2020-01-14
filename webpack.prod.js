@@ -11,7 +11,7 @@ module.exports = {
         path: path.resolve(__dirname) + "/dist"
     },
     plugins: [new HTMLWebpackPlugin({
-        title: "Webpack App",
+        title: "React Typescript Webpack App",
         template: "./index.html"
     }), new CleanWebpackPlugin()]
 }
