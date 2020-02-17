@@ -1,41 +1,34 @@
 const path = require('path')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+const { resolve } = path
 
 module.exports = {
-    entry: "./src/index.jsx",
-    context: path.resolve(__dirname),
+    entry: resolve(__dirname, 'src', 'index.tsx'),
+    context: resolve(__dirname),
     devtool: 'source-map',
     output: {
-        filename: "[name]-[hash].bundle.js",
-        path: path.resolve(__dirname) + "/dist"
+        filename: '[name].[hash].bundle.js',
+        path: resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-        alias: {
-            src: path.resolve(__dirname, 'src')
-        }
+        extensions: ['.ts', '.tsx', '.json', '.js'],
     },
     module: {
         rules: [
-            {
-                test: /\.(tsx?|jsx?)$/, use: [
-                    "thread-loader",
-                    {
-                        loader: "ts-loader", options: {
-                            transpileOnly: true,
-                            happyPackMode: true
-                        }
-                    }
-                ],
-            },
-            {enforce: "pre", test: /\.js$/, loader: "source-map-loader"},
-            {test: /\.css$/, use: ['style-loader', "thread-loader", 'css-loader']},
-            {test: /\.scss$/, use: ['style-loader', "thread-loader", 'css-loader', 'sass-loader']}
-        ]
+            { test: /\.tsx?$/, loader: 'ts-loader', options: { transpileOnly: true } },
+            { test: /\.js$/, enforce: 'pre', loader: 'source-map-loader' },
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
+        ],
     },
-    plugins: [new ForkTsCheckerWebpackPlugin()],
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HTMLWebpackPlugin({ title: 'React Demo', template: resolve(__dirname, 'index.html') }),
+    ],
     externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+        react: 'React',
+        'react-dom': 'ReactDOM',
     },
 }

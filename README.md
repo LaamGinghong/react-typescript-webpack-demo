@@ -1,4 +1,4 @@
-# react-typescript-webpack-demo
+# React TypeScript webpack demo
 
 ## `yarn start`
 

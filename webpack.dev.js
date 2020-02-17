@@ -1,31 +1,42 @@
 const config = require('./webpack.common')
+const path = require('path')
 const webpack = require('webpack')
+const merge = require('webpack-merge')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const WebpackCdnPlugin = require('webpack-cdn-plugin')
 
-module.exports = {
-    ...config,
-    mode: "development",
-    plugins: [new webpack.HotModuleReplacementPlugin(), new FriendlyErrorsWebpackPlugin()],
+const { HotModuleReplacementPlugin } = webpack
+const { resolve } = path
+
+const option = {
+    mode: 'development',
+    plugins: [
+        new HotModuleReplacementPlugin(),
+        new FriendlyErrorsWebpackPlugin(),
+        new ForkTsCheckerWebpackPlugin({ eslint: true }),
+        new WebpackCdnPlugin({
+            modules: [
+                { name: 'react', var: 'React', path: 'umd/react.development.js' },
+                { name: 'react-dom', var: 'ReactDOM', path: 'umd/react-dom.development.js' },
+            ],
+            publicPath: 'node_modules',
+            crossOrigin: 'anonymous',
+        }),
+    ],
     devServer: {
-        contentBase: "./dist",
+        contentBase: resolve(__dirname, 'dist'),
         hot: true,
         open: 'Google Chrome',
-        host: "localhost",
+        host: 'localhost',
         port: 8080,
         historyApiFallback: {
-            disableDotRule: true
+            disableDotRule: true,
         },
         overlay: true,
         inline: true,
-        stats: "errors-only",
-        /* proxy: {
-             '/api/': {
-                 changeOrigin: true,
-                 target: 'http://localhost:3000',
-                 pathRewrite: {
-                     '^/api/': '/'
-                 }
-             }
-         }*/
-    }
+        stats: 'errors-only',
+    },
 }
+
+module.exports = merge(config, option)
