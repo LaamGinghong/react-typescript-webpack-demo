@@ -1599,6 +1599,11 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+dom-align@^1.10.4:
+  version "1.10.4"
+  resolved "https://registry.npm.taobao.org/dom-align/download/dom-align-1.10.4.tgz?cache=0&sync_timestamp=1578476035837&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdom-align%2Fdownload%2Fdom-align-1.10.4.tgz#862ae4de0d11d6495c1c8ee1b195427e7caa727d"
+  integrity sha1-hirk3g0R1klcHI7hsZVCfnyqcn0=
+
 dom-converter@^0.2:
   version "0.2.0"
   resolved "https://registry.npm.taobao.org/dom-converter/download/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"
@@ -3423,6 +3428,13 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.npm.taobao.org/kind-of/download/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha1-B8BQNKbDSfoG4k+jWqdttFgM5N0=
+
+laamginghong-design@^3.10.0-beta.6:
+  version "3.10.0-beta.6"
+  resolved "https://registry.npm.taobao.org/laamginghong-design/download/laamginghong-design-3.10.0-beta.6.tgz#5ec96a0d3b37a8ae07420dc06d3617809911dc0b"
+  integrity sha1-XslqDTs3qK4HQg3AbTYXgJkR3As=
+  dependencies:
+    dom-align "^1.10.4"
 
 lcid@^2.0.0:
   version "2.0.0"
